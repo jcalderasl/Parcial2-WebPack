@@ -1,0 +1,62 @@
+<!-- paginas/ConversionUnidades/ConversionUnidades.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>CONVERSIÓN DE UNIDADES</title>
+</head>
+<center>
+
+  <body>
+    <br><br>
+    <h1>Conversión de Unidades</h1>
+    <br><br>
+    <input type="number" id="temperatura" placeholder="Ingrese temperatura">
+    <select id="unidadEntrada">
+      <option value="celsius">Celsius</option>
+      <option value="fahrenheit">Fahrenheit</option>
+    </select>
+    <label for="unidadSalida">Convertir a:</label>
+    <select id="unidadSalida">
+      <option value="celsius">Celsius</option>
+      <option value="fahrenheit">Fahrenheit</option>
+    </select>
+    <br><br>
+    <button id="realizarConversion" class="btn btn-success">Convertir</button>
+   <br><br>
+    <h5 id="resultado"></h5>
+
+    <script type="module">
+      //import * as ConversionUnidades from '../../module/ConversionUnidades.js';
+      import * as ConversionUnidades from '../../module/aggregator.js';
+
+      function realizarConversion() {
+        const temperatura = parseFloat(document.getElementById('temperatura').value);
+        const unidadEntrada = document.getElementById('unidadEntrada').value;
+        const unidadSalida = document.getElementById('unidadSalida').value;
+
+        if (unidadEntrada === unidadSalida) {
+          document.getElementById('resultado').textContent = `La temperatura es la misma: ${temperatura} ${unidadSalida}`;
+          return;
+        }
+
+        let resultado;
+        if (unidadEntrada === 'celsius' && unidadSalida === 'fahrenheit') {
+          resultado = ConversionUnidades.celsiusToFahrenheit(temperatura);
+        } else if (unidadEntrada === 'fahrenheit' && unidadSalida === 'celsius') {
+          resultado = ConversionUnidades.fahrenheitToCelsius(temperatura);
+        }
+
+        document.getElementById('resultado').textContent = `Resultado: ${resultado} ${unidadSalida}`;
+      }
+
+      document.getElementById('realizarConversion').addEventListener('click', realizarConversion);
+    </script>
+  </body>
+</center>
+
+</html>

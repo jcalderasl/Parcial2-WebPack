@@ -1,0 +1,35 @@
+<!-- paginas/Galeria/Galeria.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Galería de Imágenes</title>
+</head>
+
+<center>
+
+    <body>
+        <br><br>
+        <h1>GALERIA DE IMÁGENES</h1>
+        <br><br>
+        <div id="galeria"></div>
+        <button id="cargar" class="btn btn-success">Cargar Imagenes</button>
+
+        <script type="module">
+            //import { cargarImagenes } from '../../module/Galeria.js';
+            import * as cargarImagenes from '../../module/aggregator.js';
+
+            document.getElementById('cargar').addEventListener('click', () => {
+                const imagenes = ['../../imagenes/js.jpg', '../../imagenes/html.jpg', '../../imagenes/css.jpg'];
+                const galeriaHTML = cargarImagenes.cargarImagenes(imagenes); // Utiliza Galeria.cargarImagenes
+                document.getElementById('galeria').innerHTML = galeriaHTML;
+            });
+        </script>
+    </body>
+</center>
+
+</html>

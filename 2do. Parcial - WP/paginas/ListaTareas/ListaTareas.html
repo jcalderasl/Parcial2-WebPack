@@ -1,0 +1,49 @@
+<!-- paginas/ListaTareas/ListaTareas.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Lista de Tareas</title>
+</head>
+<center>
+<body>
+    <br><br>
+    <h1>LISTA DE TAREAS</h1>
+    <br>
+    <input id="tarea" type="text" placeholder="Ingresa Tarea">
+    <br><br>
+    <button id="agregar" class="btn btn-success">Agregar Tarea</button>
+    <button id="mostrar" class="btn btn-success">Mostrar Tareas</button>
+    <ul id="lista"></ul>
+    <script type="module">
+    
+        import * as ListaTareas from '../../module/aggregator.js';
+
+        document.getElementById('agregar').addEventListener('click', () => {
+            const tarea = document.getElementById('tarea').value;
+            ListaTareas.agregarTarea(tarea);
+        });
+
+        document.getElementById('mostrar').addEventListener('click', () => {
+            const tareas = ListaTareas.mostrarTareas();
+            const lista = document.getElementById('lista');
+            lista.innerHTML = '';
+            tareas.forEach((tarea, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${tarea.tarea} ${tarea.completada ? '(Completada)' : ''}`;
+                li.addEventListener('click', () => {
+                    ListaTareas.completarTarea(index);
+                    li.textContent = `${tarea.tarea} (Completada)`;
+                });
+                lista.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</center>
+
+</html>
